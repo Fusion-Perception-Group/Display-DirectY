@@ -43,5 +43,4 @@ export function createAxes(scene) {
 
 // 将轴和箭头添加到场景
     scene.add(xAxis, xArrow, yAxis, yArrow, zAxis, zArrow);
-    scene.add(xAxis, xArrow, yAxis, yArrow, zAxis, zArrow);
 }
