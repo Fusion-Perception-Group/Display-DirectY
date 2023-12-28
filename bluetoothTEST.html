@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bluetooth Data Reader</title>
+</head>
+
+<body>
+    <button id="connect">Connect to Bluetooth Device</button>
+    <p id="data">Data will appear here...</p>
+
+    <script>
+        document.getElementById('connect').addEventListener('click', function () {
+            navigator.bluetooth.requestDevice({
+                filters: [
+                    {
+                        name: "", // 可以为空，不限定设备名称
+                        services: [], // 可以为空，不限定设备的服务
+                        // 添加过滤条件，只选择指定 MAC 地址的设备
+                        deviceClass: ['00001A'], // 根据设备的蓝牙设备类别过滤
+                        // 添加过滤条件，只选择指定 MAC 地址的设备
+                        // 指定 MAC 地址的格式：XX:XX:XX:XX:XX:XX，注意要使用大写字母和冒号
+                        // 在这里添加你要过滤的 MAC 地址
+                        options: {
+                            acceptAllDevices: false,
+                            filters: [{ address: '34:41:5D:7D:7F:7A' }]
+                        }
+                    }
+                ]
+            })
+                .then(device => {
+                    console.log('Connecting to the device...');
+                    return device.gatt.connect();
+                })
+                .then(server => {
+                    // 获取蓝牙服务
+                    // 注意: 这里的 serviceUUID 需要替换为你的设备服务的UUID
+                    return server.getPrimaryService('0x1825');
+                })
+                .then(service => {
+                    // 获取蓝牙特性
+                    // 注意: 这里的 characteristicUUID 需要替换为你的特性的UUID
+                    return service.getCharacteristic('characteristicUUID');
+                })
+                .then(characteristic => {
+                    return characteristic.readValue();
+                })
+                .then(value => {
+                    // 假设数据是文本格式
+                    let decoder = new TextDecoder('utf-8');
+                    document.getElementById('data').textContent = decoder.decode(value);
+                })
+                .catch(error => {
+                    console.log('Argh! ' + error);
+                });
+        });
+    </script>
+</body>
+
+</html>
