@@ -1,5 +1,5 @@
 import * as THREE from '/node_modules/three/build/three.module.js';
-import {createRay} from './createRay.js';
+import {createRay} from '../createRay.js';
 
 // 四元数用于随机平滑旋转射线
 let quaternion = new THREE.Quaternion();

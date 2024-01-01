@@ -6,4 +6,5 @@
  *
  * Version: 1.0
  */
-
+import * as serialComm from './ble/bluetooth.js'; //蓝牙脚本
+// import * as threeScript from './three/three.js'; // 引入 three.js 脚本

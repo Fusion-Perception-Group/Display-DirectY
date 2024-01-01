@@ -12,9 +12,10 @@ body {
     border: 2px solid aliceblue;
 }
 
-/* canvas{ */
-    /* display: block; */
-    /* scale: 40%; */
+canvas{ 
+    display: block;
+    margin: 0 auto;
+    scale: 70%;
     /* transform-origin:50% 0%; */
-    /* border: 5px solid  rgb(0, 0, 0); */
-/* } */
+    border: 5px solid  rgb(0, 0, 0);
+}
